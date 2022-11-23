@@ -1,10 +1,12 @@
 package base;
 
+import helper.ScreenshotHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -25,7 +27,10 @@ public class TestBase {
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            ScreenshotHelper.takeScreenshot(driver, result.getName());
+        }
         driver.quit();
     }
 }

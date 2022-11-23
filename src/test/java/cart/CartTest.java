@@ -1,10 +1,18 @@
 package cart;
 
 import base.Pages;
+import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 
 public class CartTest extends Pages {
+
+    @Test
+    public void screenshotShotDemo() {
+        productGridPage.openProductWithName("HUMMINGBIRD T-SHIRT");
+        // force test to fail -> TestBase has mechanism to take screenshot on fail
+        Assertions.assertThat(1).isEqualTo(2);
+    }
 
     @Test
     public void shouldVerifyCartCalculationsPartialFluentPOP() {
